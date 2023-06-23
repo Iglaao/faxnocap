@@ -17,7 +17,7 @@ export default function PlayersTable(props) {
             </tr>
           </thead>
           <tbody>
-            {props.info.map((player, index) => (
+            {props.info.slice(0, 10).map((player, index) => (
               <tr key={index}>
                 <td>{player.Name}</td>
                 <td>{player.GuildName}</td>

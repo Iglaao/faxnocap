@@ -7,6 +7,8 @@ import AllianceTable from "./Battleboard/AllianceTable";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "./firebase";
 import { useEffect, useState } from "react";
+import NavBar from "./Components/NavBar";
+import MainPage from "./Pages/MainPage";
 
 function App() {
   const [battleboard, setBattleboard] = useState();
@@ -29,14 +31,7 @@ function App() {
     test();
   }, []);
   if (battleboard) {
-    return (
-      <>
-        <BattleInfo info={battleboard} />
-        <GuildTable info={guilds} />
-        <PlayersTable info={players} />
-        <AllianceTable info={alliances} />
-      </>
-    );
+    return <>{<MainPage />}</>;
   } else return null;
 }
 
