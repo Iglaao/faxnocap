@@ -15,7 +15,7 @@ export default function GuildTable(props) {
           </tr>
         </thead>
         <tbody>
-          {props.info.map((guild, index) => (
+          {props.battleboard.map((guild, index) => (
             <tr key={index}>
               <td>{guild.Name}</td>
               <td>{guild.Alliance}</td>

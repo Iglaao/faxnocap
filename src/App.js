@@ -1,38 +1,19 @@
-import logo from "./logo.svg";
 import "./App.css";
-import BattleInfo from "./Battleboard/BattleInfo";
-import GuildTable from "./Battleboard/GuildTable";
-import PlayersTable from "./Battleboard/PlayersTable";
-import AllianceTable from "./Battleboard/AllianceTable";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "./firebase";
-import { useEffect, useState } from "react";
-import NavBar from "./Components/NavBar";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainPage from "./Pages/MainPage";
+import BattleboardPage from "./Pages/BattleboardPage";
 
 function App() {
-  const [battleboard, setBattleboard] = useState();
-  const [alliances, setAlliances] = useState();
-  const [guilds, setGuilds] = useState();
-  const [players, setPlayers] = useState();
-
-  useEffect(() => {
-    const test = async () => {
-      const docRef = doc(db, "s20", "21.06.2023");
-      const docSnap = await getDoc(docRef);
-      const data = docSnap.data();
-      var arr = Object.values(data)[0];
-
-      setBattleboard(arr);
-      setAlliances(Object.values(arr.Alliances));
-      setPlayers(Object.values(arr.Players));
-      setGuilds(Object.values(arr.Guilds));
-    };
-    test();
-  }, []);
-  if (battleboard) {
-    return <>{<MainPage />}</>;
-  } else return null;
+  return (
+    <div>
+      <Router>
+        <Routes>
+          <Route exact path="" element={<MainPage />} />
+          <Route exact path="/battleboard" element={<BattleboardPage />} />
+        </Routes>
+      </Router>
+    </div>
+  );
 }
 
 export default App;

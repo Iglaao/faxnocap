@@ -3,11 +3,15 @@ import NavBar from "../Components/NavBar";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import SeasonSelect from "../Components/SeasonSelect";
+import BpvSelect from "../Components/BpvSelect";
+import { useNavigate } from "react-router-dom";
 
 export default function MainPage() {
   const [season, setSeason] = useState("s20");
   const [lastBattles, setLastBattles] = useState();
   const [offset, setOffset] = useState(0);
+  const [slice, setSlice] = useState(10);
+  const navigate = useNavigate();
 
   async function fetchLastBattles() {
     var docSnap = await getDoc(doc(db, season + "dict", "dict"));
@@ -39,8 +43,12 @@ export default function MainPage() {
     fetchLastBattles();
   };
 
+  const handleSlice = (s) => {
+    setOffset(0);
+    setSlice(s);
+  };
   function incrementOffset() {
-    if (Math.floor(lastBattles.length / 10) === offset) return;
+    if (Math.floor(lastBattles.length / slice) === offset) return;
     setOffset(offset + 1);
   }
 
@@ -53,19 +61,33 @@ export default function MainPage() {
     setOffset(0);
   }
   function setOffsetToEnd() {
-    setOffset(Math.floor(lastBattles.length / 10));
+    setOffset(Math.floor(lastBattles.length / slice));
   }
+
+  const navigateToBB = (battleData) => {
+    navigate("/battleboard", {
+      state: {
+        id: battleData[0],
+        date: battleData[1].StartTime.toDate()
+          .toLocaleString("en-GB", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          })
+          .replaceAll("/", "."),
+        season: season,
+      },
+    });
+  };
   useEffect(() => {
     fetchLastBattles();
-    console.log("x");
-  }, [season]);
+  }, [slice, season]);
 
   if (lastBattles) {
     return (
       <>
         <NavBar />
         <SeasonSelect onSelectChange={handleSelect} selectedSeason={season} />
-        {season && <p>Data from Child: {season}</p>}
         <table>
           <thead>
             <tr>
@@ -75,21 +97,33 @@ export default function MainPage() {
           </thead>
           <tbody>
             {lastBattles
+              .slice(offset * slice, (offset + 1) * slice)
               .map((battle, index) => (
                 <tr key={index}>
-                  <td>{battle[1].Title}</td>
+                  <td>
+                    <a
+                      href=""
+                      onClick={() => {
+                        navigateToBB(battle);
+                      }}
+                    >
+                      {battle[1].Title}
+                    </a>
+                  </td>
                   <td>
                     {battle[1].StartTime.toDate()
                       .toLocaleString("en-GB", {
-                        timeZone: "UTC",
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "numeric",
                       })
                       .replaceAll("/", ".")}
                   </td>
                 </tr>
-              ))
-              .slice(offset * 10, offset * 10 + 10)}
+              ))}
           </tbody>
         </table>
+        <BpvSelect onSelectChange={handleSlice} selectedAmount={slice} />
         <button onClick={setOffsetToStart}>start</button>
         <button onClick={decrementOffset}>back</button>
         <button onClick={incrementOffset}>next</button>
@@ -101,7 +135,6 @@ export default function MainPage() {
       <>
         <NavBar />
         <SeasonSelect onSelectChange={handleSelect} selectedSeason={season} />
-        {season && <p>Data from Child: {season}</p>}
         <div>Empty</div>
       </>
     );

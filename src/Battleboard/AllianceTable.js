@@ -14,7 +14,7 @@ export default function AllianceTable(props) {
           </tr>
         </thead>
         <tbody>
-          {props.info.map((alliance, index) => (
+          {props.battleboard.map((alliance, index) => (
             <tr key={index}>
               <td>{alliance.Name}</td>
               <td>{alliance.Players}</td>
