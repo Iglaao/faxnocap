@@ -79,6 +79,7 @@ export default function MainPage() {
       },
     });
   };
+
   useEffect(() => {
     fetchLastBattles();
   }, [slice, season]);
