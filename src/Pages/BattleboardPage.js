@@ -4,7 +4,7 @@ import AllianceTable from "../Battleboard/AllianceTable";
 import GuildTable from "../Battleboard/GuildTable";
 import PlayerTable from "../Battleboard/PlayersTable";
 import { db } from "../firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, Timestamp } from "firebase/firestore";
 import NavBar from "../Components/NavBar";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -19,8 +19,17 @@ export default function BattleboardPage() {
   async function fetchBattleboard() {
     var docSnap = await getDoc(doc(db, season, battleTime));
     if (docSnap.exists()) {
-      const data = docSnap.data();
-      setBB(Object.entries(data).find((x) => x[0] === battleId)[1]);
+      const collectionData = docSnap.data();
+      const docData = Object.entries(collectionData).find(
+        (x) => x[0] === battleId
+      )[1];
+      if (typeof docData === "string" || docData instanceof String) {
+        var temp = JSON.parse(docData);
+        temp.StartTime = Timestamp.fromDate(new Date(temp.StartTime));
+        setBB(temp);
+      } else {
+        setBB(docData);
+      }
     } else {
       setBB(null);
     }

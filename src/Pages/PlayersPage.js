@@ -44,7 +44,7 @@ export default function PlayersPage() {
             </tr>
           </thead>
           <tbody>
-            {players.slice(0, 20).map((player) => (
+            {players.map((player) => (
               <tr key={player}>
                 <td>
                   <a
