@@ -4,48 +4,31 @@ import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import DataChart from "../Components/DataChart";
+import { getAggregatedData, getDataMap } from "../ChartFunctions";
 
 export default function PlayerStatsPage({ match }) {
   const playerName = useParams().playerName;
   const [playerData, setPlayerData] = useState();
+  const [skip, setSkip] = useState();
   const season = "s20";
-
+  const gatheringPaths = [
+    "LifetimeStatistics.FishingFame",
+    "LifetimeStatistics.Gathering.All.Total",
+    "LifetimeStatistics.Gathering.Fiber.Total",
+    "LifetimeStatistics.Gathering.Hide.Total",
+    "LifetimeStatistics.Gathering.Ore.Total",
+    "LifetimeStatistics.Gathering.Rock.Total",
+    "LifetimeStatistics.Gathering.Wood.Total",
+  ];
+  const attendancePath = ["Attendance"];
+  const famePaths = ["KillFame", "DeathFame"];
   async function fetchPlayerStats() {
     var docSnap = await getDoc(doc(db, season + "members", playerName));
     if (docSnap.exists()) {
       var data = docSnap.data();
+      console.log(data);
       setPlayerData(data);
     }
-  }
-
-  function getAttendance() {
-    var attendance = [];
-    Object.keys(playerData).forEach((dateKey) => {
-      const [day, month, year] = dateKey.split(".");
-      attendance.push({
-        key: new Date(`${month}/${day}/${year}`),
-        value:
-          typeof playerData[dateKey].Attendance !== "undefined"
-            ? playerData[dateKey].Attendance
-            : 0,
-      });
-    });
-    attendance.sort(function (a, b) {
-      return new Date(a.key) - new Date(b.key);
-    });
-    return attendance;
-  }
-  function getAggAttendance() {
-    var aggAttendance = getAttendance();
-    aggAttendance = aggAttendance.reduce((accumulator, currentValue) => {
-      const sum =
-        accumulator.length > 0
-          ? accumulator[accumulator.length - 1].value + currentValue.value
-          : currentValue.value;
-      accumulator.push({ key: currentValue.key, value: sum });
-      return accumulator;
-    }, []);
-    return aggAttendance;
   }
 
   useEffect(() => {
@@ -57,8 +40,13 @@ export default function PlayerStatsPage({ match }) {
       <>
         <NavBar />
         <div>{playerName}</div>
-        <DataChart values={getAttendance()} name={"Attendance"} />
-        <DataChart values={getAggAttendance()} />
+        <DataChart
+          values={getDataMap(playerData, attendancePath)}
+          name={playerName + " attendance"}
+        />
+        <DataChart values={getAggregatedData(playerData, attendancePath)} />
+        <DataChart values={getDataMap(playerData, gatheringPaths)} />
+        <DataChart values={getDataMap(playerData, famePaths)} />
       </>
     );
   }
