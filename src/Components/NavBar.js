@@ -6,8 +6,14 @@ export default function NavBar() {
   const navigateToPlayers = () => {
     navigate("/players");
   };
+  const navigateToHomePage = () => {
+    navigate("/");
+  };
   return (
     <nav>
+      <button onClick={navigateToHomePage} type="button">
+        Home
+      </button>
       <button onClick={navigateToPlayers} type="button">
         Player Stats
       </button>

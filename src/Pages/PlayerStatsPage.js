@@ -5,11 +5,13 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import DataChart from "../Components/DataChart";
 import { getAggregatedData, getDataMap } from "../ChartFunctions";
+import PieChart from "../Components/PieChart";
 
 export default function PlayerStatsPage({ match }) {
   const playerName = useParams().playerName;
   const [playerData, setPlayerData] = useState();
-  const [skip, setSkip] = useState();
+  const [lastData, setLastData] = useState();
+
   const season = "s20";
   const gatheringPaths = [
     "LifetimeStatistics.FishingFame",
@@ -20,15 +22,39 @@ export default function PlayerStatsPage({ match }) {
     "LifetimeStatistics.Gathering.Rock.Total",
     "LifetimeStatistics.Gathering.Wood.Total",
   ];
+  const pvePaths = [
+    "LifetimeStatistics.PvE.Avalon",
+    "LifetimeStatistics.PvE.CorruptedDungeon",
+    "LifetimeStatistics.PvE.Hellgate",
+    "LifetimeStatistics.PvE.Mists",
+    "LifetimeStatistics.PvE.Outlands",
+    "LifetimeStatistics.PvE.Royal",
+    "LifetimeStatistics.PvE.Total",
+  ];
   const attendancePath = ["Attendance"];
   const famePaths = ["KillFame", "DeathFame"];
+
   async function fetchPlayerStats() {
     var docSnap = await getDoc(doc(db, season + "members", playerName));
     if (docSnap.exists()) {
       var data = docSnap.data();
-      console.log(data);
       setPlayerData(data);
+      getLastData(data);
     }
+  }
+
+  function getLastData(data) {
+    var arr = [];
+    Object.keys(data).forEach((dkey) => {
+      const [day, month, year] = dkey.split(".");
+      var date = new Date(`${month}/${day}/${year}`);
+      arr.push({
+        key: dkey,
+        date: new Date(date),
+      });
+    });
+    arr.sort((a, b) => b.date - a.date);
+    setLastData(data[arr[0].key]);
   }
 
   useEffect(() => {
@@ -40,13 +66,16 @@ export default function PlayerStatsPage({ match }) {
       <>
         <NavBar />
         <div>{playerName}</div>
-        <DataChart
-          values={getDataMap(playerData, attendancePath)}
-          name={playerName + " attendance"}
-        />
+        <div>{lastData.KillFame}</div>
+
+        <DataChart values={getDataMap(playerData, attendancePath)} />
         <DataChart values={getAggregatedData(playerData, attendancePath)} />
-        <DataChart values={getDataMap(playerData, gatheringPaths)} />
-        <DataChart values={getDataMap(playerData, famePaths)} />
+        <DataChart values={getDataMap(playerData, gatheringPaths, true)} />
+        <DataChart values={getDataMap(playerData, famePaths, true)} />
+        <DataChart values={getDataMap(playerData, pvePaths, true)} />
+
+        <PieChart values={lastData.LifetimeStatistics.PvE} type={"pve"} />
+        <PieChart values={lastData.LifetimeStatistics} type={"gathering"} />
       </>
     );
   }

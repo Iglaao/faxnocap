@@ -11,7 +11,7 @@ export function getValueFromData(data, path) {
   return value;
 }
 
-export function getDataMap(data, paths) {
+export function getDataMap(data, paths, skip) {
   var dataArr = [];
   var pathsArr = Array.from(paths);
   var name = "";
@@ -23,6 +23,9 @@ export function getDataMap(data, paths) {
       date.setHours(2);
       var dataValue = getValueFromData(data[dataKey], path);
       name = data[dataKey].Name;
+      if (skip && (dataValue === 0 || typeof dataValue === "undefined")) {
+        return;
+      }
       dataSerie.push({
         key: date,
         value: typeof dataValue !== "undefined" ? dataValue : 0,
@@ -40,6 +43,7 @@ export function getDataMap(data, paths) {
           .replace("Gathering", "")
           .replace("Total", "")
           .replace("Fame", "")
+          .replace("PvE", "")
           .replaceAll(".", ""),
       data: dataSerie,
     });
@@ -48,7 +52,7 @@ export function getDataMap(data, paths) {
 }
 
 export function getAggregatedData(data, path) {
-  var dataToAggregate = getDataMap(data, path);
+  var dataToAggregate = getDataMap(data, path, false);
   dataToAggregate.forEach((aggregatedData) => {
     aggregatedData.data = aggregatedData.data.reduce(
       (accumulator, currentValue) => {
