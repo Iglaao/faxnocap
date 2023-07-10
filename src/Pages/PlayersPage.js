@@ -3,9 +3,12 @@ import NavBar from "../Components/NavBar";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useLocation, useNavigate } from "react-router-dom";
+import SearchBar from "../Components/SearchBar";
 
 export default function PlayersPage() {
   const [players, setPlayers] = useState();
+  const [filteredPlayers, setFilteredPlayers] = useState();
+  const [keyword, setKeyword] = useState("");
   const location = useLocation();
   //const season = location.state?.season;
   const season = "s20";
@@ -20,8 +23,14 @@ export default function PlayersPage() {
           .flat()
           .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
       );
+      setFilteredPlayers(
+        Object.values(data)
+          .flat()
+          .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
+      );
     } else {
       setPlayers(null);
+      setFilteredPlayers(null);
     }
   }
 
@@ -29,6 +38,13 @@ export default function PlayersPage() {
     navigate(`/playerStats/${player}`, {});
   };
 
+  const updateKeyword = (keyword) => {
+    const filtered = players.filter((player) => {
+      return `${player.toLowerCase()}`.includes(keyword.toLowerCase());
+    });
+    setKeyword(keyword);
+    setFilteredPlayers(filtered);
+  };
   useEffect(() => {
     fetchPlayerList();
   }, []);
@@ -36,7 +52,7 @@ export default function PlayersPage() {
     return (
       <>
         <NavBar />
-        <input type="text" placeholder="Search for player..."></input>
+        <SearchBar keyword={keyword} onChange={updateKeyword} />
         <table>
           <thead>
             <tr>
@@ -44,7 +60,7 @@ export default function PlayersPage() {
             </tr>
           </thead>
           <tbody>
-            {players.map((player) => (
+            {filteredPlayers.map((player) => (
               <tr key={player}>
                 <td>
                   <a

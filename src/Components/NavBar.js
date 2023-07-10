@@ -9,6 +9,9 @@ export default function NavBar() {
   const navigateToHomePage = () => {
     navigate("/");
   };
+  const navigateToBattleviewer = () => {
+    navigate("/battleviewer");
+  };
   return (
     <nav>
       <button onClick={navigateToHomePage} type="button">
@@ -17,7 +20,9 @@ export default function NavBar() {
       <button onClick={navigateToPlayers} type="button">
         Player Stats
       </button>
-      <button href="">Battleboard Viewer</button>
+      <button onClick={navigateToBattleviewer} type="button">
+        Battleboard Viewer
+      </button>
       <button href="">Attendance</button>
     </nav>
   );

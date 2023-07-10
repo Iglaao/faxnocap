@@ -6,6 +6,7 @@ import { db } from "../firebase";
 import DataChart from "../Components/DataChart";
 import { getAggregatedData, getDataMap } from "../ChartFunctions";
 import PieChart from "../Components/PieChart";
+import PlayerCard from "../Components/PlayerCard";
 
 export default function PlayerStatsPage({ match }) {
   const playerName = useParams().playerName;
@@ -60,13 +61,12 @@ export default function PlayerStatsPage({ match }) {
   useEffect(() => {
     fetchPlayerStats();
   }, []);
-
-  if (playerData) {
+  console.log(lastData);
+  if (playerData && lastData) {
     return (
       <>
         <NavBar />
-        <div>{playerName}</div>
-        <div>{lastData.KillFame}</div>
+        <PlayerCard values={lastData} />
 
         <DataChart values={getDataMap(playerData, attendancePath)} />
         <DataChart values={getAggregatedData(playerData, attendancePath)} />

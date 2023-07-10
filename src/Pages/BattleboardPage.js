@@ -34,9 +34,6 @@ export default function BattleboardPage() {
       setBB(null);
     }
   }
-  function returnToMainPage() {
-    navigate("/");
-  }
 
   useEffect(() => {
     fetchBattleboard();
@@ -46,7 +43,6 @@ export default function BattleboardPage() {
     return (
       <>
         <NavBar />
-        <button onClick={returnToMainPage}>Return</button>
         <BattleInfo battleboard={bb} />
         <AllianceTable battleboard={Object.values(bb.Alliances)} />
         <GuildTable battleboard={Object.values(bb.Guilds)} />

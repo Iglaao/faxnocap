@@ -4,6 +4,7 @@ import MainPage from "./Pages/MainPage";
 import BattleboardPage from "./Pages/BattleboardPage";
 import PlayersPage from "./Pages/PlayersPage";
 import PlayerStatsPage from "./Pages/PlayerStatsPage";
+import ViewerPage from "./Pages/ViewerPage";
 function App() {
   return (
     <div>
@@ -17,6 +18,7 @@ function App() {
             path="/playerStats/:playerName"
             element={<PlayerStatsPage />}
           />
+          <Route exact path="/battleviewer" element={<ViewerPage />} />
         </Routes>
       </Router>
     </div>
