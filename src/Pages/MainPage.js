@@ -111,7 +111,7 @@ export default function MainPage() {
                       {battle[1].Title}
                     </a>
                   </td>
-                  <td>
+                  <td style={{ textAlign: "center" }}>
                     {battle[1].StartTime.toDate()
                       .toLocaleString("en-GB", {
                         day: "2-digit",

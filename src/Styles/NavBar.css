@@ -8,6 +8,7 @@
   overflow: hidden;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: black;
   border-radius: 10px;
   width: 90%;
@@ -37,12 +38,17 @@
   background-color: transparent;
   color: white;
 }
-
+.right-side.navbtn button {
+  height: 35px;
+  background-color: #2e8b57;
+  margin-right: 15px;
+  border-radius: 5px;
+}
 .left-side.navbtn button:hover {
   background-color: #212529;
 }
 .right-side.navbtn button:hover {
-  background-color: #dee2e6;
+  background-color: #236a42;
 }
 
 img {

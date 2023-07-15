@@ -1,0 +1,12 @@
+table {
+}
+
+tr:nth-child(even) {
+  background-color: #adb5bd;
+}
+tr:nth-child(odd) {
+  background-color: #ced4da;
+}
+th {
+  background-color: #6c757d;
+}

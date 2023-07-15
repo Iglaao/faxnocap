@@ -4,6 +4,7 @@ import DiscordIcon from "../Icons/discord_icon.svg";
 import HomeIcon from "../Icons/home_icon.svg";
 import SearchIcon from "../Icons/search_icon.svg";
 import UsersIcon from "../Icons/users_icon.svg";
+import HamburgerIcon from "../Icons/hamburger_icon.svg";
 
 export default function NavBar() {
   const navigate = useNavigate();
@@ -29,19 +30,19 @@ export default function NavBar() {
         <div className="left-side">
           <div className="left-side navbtn">
             <button onClick={navigateToHomePage}>
-              <img src={HomeIcon} alt="Discord Icon" />
+              <img src={HomeIcon} alt="Home Icon" />
               Home
             </button>
           </div>
           <div className="left-side navbtn">
             <button onClick={navigateToPlayers}>
-              <img src={UsersIcon} alt="Discord Icon" />
+              <img src={UsersIcon} alt="Users Icon" />
               Player Stats
             </button>
           </div>
           <div className="left-side navbtn">
             <button onClick={navigateToBattleviewer}>
-              <img src={SearchIcon} alt="Discord Icon" />
+              <img src={SearchIcon} alt="Search Icon" />
               Battleboard Viewer
             </button>
           </div>
