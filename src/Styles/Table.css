@@ -1,12 +1,19 @@
-table {
+.table-style table {
+  backdrop-filter: blur(5px);
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  text-shadow: 0px 0px 2px black, -2px -2px 2px black, 2px -2px 2px black,
+    -2px 2px 2px black, 2px 2px 2px black;
+  text-align: center;
 }
-
-tr:nth-child(even) {
-  background-color: #adb5bd;
+.table-style tr:nth-child(even) {
+  background-color: rgba(30, 38, 43, 0.3);
 }
-tr:nth-child(odd) {
-  background-color: #ced4da;
+.table-style tr:nth-child(odd) {
+  background-color: rgba(174, 176, 178, 0.3);
 }
-th {
-  background-color: #6c757d;
+.table-style th {
+  background-color: rgba(3, 16, 22, 0.3);
 }

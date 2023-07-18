@@ -53,29 +53,38 @@ export default function PlayersPage() {
       <>
         <NavBar />
         <SearchBar keyword={keyword} onChange={updateKeyword} />
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredPlayers.map((player) => (
-              <tr key={player}>
-                <td>
-                  <a
-                    href=""
-                    onClick={() => {
-                      navigateToPlayer(player);
-                    }}
-                  >
-                    {player}
-                  </a>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div
+          style={{
+            overflowY: "scroll",
+            height: "100vh",
+          }}
+        >
+          <div className="table-style">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredPlayers.map((player) => (
+                  <tr key={player}>
+                    <td>
+                      <a
+                        href=""
+                        onClick={() => {
+                          navigateToPlayer(player);
+                        }}
+                      >
+                        {player}
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </>
     );
   } else {

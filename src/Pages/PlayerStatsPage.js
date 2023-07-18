@@ -66,16 +66,43 @@ export default function PlayerStatsPage({ match }) {
     return (
       <>
         <NavBar />
-        <PlayerCard values={lastData} />
-
-        <DataChart values={getDataMap(playerData, attendancePath)} />
-        <DataChart values={getAggregatedData(playerData, attendancePath)} />
-        <DataChart values={getDataMap(playerData, gatheringPaths, true)} />
-        <DataChart values={getDataMap(playerData, famePaths, true)} />
-        <DataChart values={getDataMap(playerData, pvePaths, true)} />
-
-        <PieChart values={lastData.LifetimeStatistics.PvE} type={"pve"} />
-        <PieChart values={lastData.LifetimeStatistics} type={"gathering"} />
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-evenly",
+          }}
+        >
+          <PlayerCard values={lastData} />
+          <div className="card">
+            <div className="title">Attendance per day</div>
+            <DataChart values={getDataMap(playerData, attendancePath)} />
+          </div>
+          <div className="card">
+            <div className="title">Attendance</div>
+            <DataChart values={getAggregatedData(playerData, attendancePath)} />
+          </div>
+          <div className="card">
+            <div className="title">PvP Fame</div>
+            <DataChart values={getDataMap(playerData, famePaths, true)} />
+          </div>
+          <div className="card">
+            <div className="title">Gathering Fame</div>
+            <DataChart values={getDataMap(playerData, gatheringPaths, true)} />
+          </div>
+          <div className="card">
+            <div className="title">PvE Fame</div>
+            <DataChart values={getDataMap(playerData, pvePaths, true)} />
+          </div>
+          <div className="card">
+            <div className="title">PvE</div>
+            <PieChart values={lastData.LifetimeStatistics.PvE} type={"pve"} />
+          </div>
+          <div className="card">
+            <div className="title">Gathering</div>
+            <PieChart values={lastData.LifetimeStatistics} type={"gathering"} />
+          </div>
+        </div>
       </>
     );
   }

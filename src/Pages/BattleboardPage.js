@@ -4,7 +4,7 @@ import AllianceTable from "../Battleboard/AllianceTable";
 import GuildTable from "../Battleboard/GuildTable";
 import PlayerTable from "../Battleboard/PlayersTable";
 import { db } from "../firebase";
-import { doc, getDoc, Timestamp } from "firebase/firestore";
+import { collection, doc, getDoc, Timestamp } from "firebase/firestore";
 import NavBar from "../Components/NavBar";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -20,6 +20,7 @@ export default function BattleboardPage() {
     var docSnap = await getDoc(doc(db, season, battleTime));
     if (docSnap.exists()) {
       const collectionData = docSnap.data();
+      console.log(collectionData);
       const docData = Object.entries(collectionData).find(
         (x) => x[0] === battleId
       )[1];
@@ -43,10 +44,12 @@ export default function BattleboardPage() {
     return (
       <>
         <NavBar />
-        <BattleInfo battleboard={bb} />
-        <AllianceTable battleboard={Object.values(bb.Alliances)} />
-        <GuildTable battleboard={Object.values(bb.Guilds)} />
-        <PlayerTable battleboard={Object.values(bb.Players)} />
+        <div className="table-style">
+          <BattleInfo battleboard={bb} />
+          <AllianceTable battleboard={Object.values(bb.Alliances)} />
+          <GuildTable battleboard={Object.values(bb.Guilds)} />
+          <PlayerTable battleboard={Object.values(bb.Players)} />
+        </div>
       </>
     );
   } else {

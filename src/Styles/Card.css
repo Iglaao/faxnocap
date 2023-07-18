@@ -1,0 +1,19 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  height: 340px;
+  width: 400px;
+  background-color: rgba(3, 16, 22, 0.8);
+  backdrop-filter: blur(5px);
+  border-radius: 20px;
+  margin-top: 15px;
+}
+.card .title {
+  padding: 5px;
+  font-weight: bold;
+}
+.card table td {
+  text-align: right;
+}

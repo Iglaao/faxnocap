@@ -23,8 +23,8 @@ export default function DataChart(props) {
     <>
       <div
         style={{
-          width: "400px",
-          height: "300px",
+          height: "inherit",
+          width: "inherit",
         }}
       >
         <Chart
@@ -32,6 +32,7 @@ export default function DataChart(props) {
             data,
             primaryAxis,
             secondaryAxes,
+            dark: true,
           }}
         />
       </div>

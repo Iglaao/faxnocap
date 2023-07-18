@@ -5,9 +5,19 @@ import BattleboardPage from "./Pages/BattleboardPage";
 import PlayersPage from "./Pages/PlayersPage";
 import PlayerStatsPage from "./Pages/PlayerStatsPage";
 import ViewerPage from "./Pages/ViewerPage";
+import Background from "./Images/fax_backgroundv2.png";
+
 function App() {
   return (
-    <div>
+    <div
+      style={{
+        backgroundImage: `url(${Background})`,
+        backgroundPosition: "center",
+        backgroundSize: "contain",
+        backgroundRepeat: "repeat",
+        minHeight: "100vh",
+      }}
+    >
       <Router>
         <Routes>
           <Route exact path="" element={<MainPage />} />

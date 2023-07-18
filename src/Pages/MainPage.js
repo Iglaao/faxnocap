@@ -5,6 +5,11 @@ import { db } from "../firebase";
 import SeasonSelect from "../Components/SeasonSelect";
 import BpvSelect from "../Components/BpvSelect";
 import { useNavigate } from "react-router-dom";
+import Footer from "../Components/Footer";
+import NextIcon from "../Icons/next_icon.svg";
+import DNextIcon from "../Icons/double_next_icon.svg";
+import PrevIcon from "../Icons/previous_icon.svg";
+import DPrevIcon from "../Icons/double_previous_icon.svg";
 
 export default function MainPage() {
   const [season, setSeason] = useState("s20");
@@ -89,46 +94,69 @@ export default function MainPage() {
       <>
         <NavBar />
         <SeasonSelect onSelectChange={handleSelect} selectedSeason={season} />
-        <table>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {lastBattles
-              .slice(offset * slice, (offset + 1) * slice)
-              .map((battle, index) => (
-                <tr key={index}>
-                  <td>
-                    <a
-                      href=""
-                      onClick={() => {
-                        navigateToBB(battle);
-                      }}
-                    >
-                      {battle[1].Title}
-                    </a>
-                  </td>
-                  <td style={{ textAlign: "center" }}>
-                    {battle[1].StartTime.toDate()
-                      .toLocaleString("en-GB", {
-                        day: "2-digit",
-                        month: "2-digit",
-                        year: "numeric",
-                      })
-                      .replaceAll("/", ".")}
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+        <div className="table-style">
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {lastBattles
+                .slice(offset * slice, (offset + 1) * slice)
+                .map((battle, index) => (
+                  <tr key={index}>
+                    <td style={{ textAlign: "left" }}>
+                      <a
+                        href=""
+                        onClick={() => {
+                          navigateToBB(battle);
+                        }}
+                      >
+                        {battle[1].Title}
+                      </a>
+                    </td>
+                    <td style={{ textAlign: "center" }}>
+                      {battle[1].StartTime.toDate()
+                        .toLocaleString("en-GB", {
+                          day: "2-digit",
+                          month: "2-digit",
+                          year: "numeric",
+                        })
+                        .replaceAll("/", ".")}
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
         <BpvSelect onSelectChange={handleSlice} selectedAmount={slice} />
-        <button onClick={setOffsetToStart}>start</button>
-        <button onClick={decrementOffset}>back</button>
-        <button onClick={incrementOffset}>next</button>
-        <button onClick={setOffsetToEnd}>end</button>
+        <button
+          style={{ backgroundColor: "transparent" }}
+          onClick={setOffsetToStart}
+        >
+          <img src={DPrevIcon} alt="Double Previous Icon" />
+        </button>
+        <button
+          style={{ backgroundColor: "transparent" }}
+          onClick={decrementOffset}
+        >
+          <img src={PrevIcon} alt="Previous Icon" />
+        </button>
+        <button
+          style={{ backgroundColor: "transparent" }}
+          onClick={incrementOffset}
+        >
+          <img src={NextIcon} alt="Next Icon" />
+        </button>
+        <button
+          style={{ backgroundColor: "transparent" }}
+          onClick={setOffsetToEnd}
+        >
+          <img src={DNextIcon} alt="Double Next Icon" />
+        </button>
+        <Footer />
       </>
     );
   } else {
