@@ -7,22 +7,22 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 export default function PieChart(props) {
   const [chartData, setChartData] = useState();
   const BackgroundColor = [
-    "rgba(255, 0, 0, 0.5)",
-    "rgba(255, 255, 0, 0.5)",
-    "rgba(0, 255, 255, 0.5)",
-    "rgba(0, 0, 255, 0.5)",
-    "rgba(0, 128, 0, 0.5)",
-    "rgba(128, 0, 128, 0.5)",
-    "rgba(128, 128, 128, 0.5)",
+    "rgba(15, 131, 171, 0.5)",
+    "rgba(250, 164, 58, 0.5)",
+    "rgba(253, 104, 104, 0.5)",
+    "rgba(83, 207, 201, 0.5)",
+    "rgba(162, 217, 37, 0.5)",
+    "rgba(222, 207, 63, 0.5)",
+    "rgba(115, 79, 233, 0.5)",
   ];
   const BorderColor = [
-    "rgba(255, 0, 0, 1)",
-    "rgba(255, 255, 0, 1)",
-    "rgba(0, 255, 255, 1)",
-    "rgba(0, 0, 255, 1)",
-    "rgba(0, 128, 0, 1)",
-    "rgba(128, 0, 128, 1)",
-    "rgba(128, 128, 128, 1)",
+    "rgba(15, 131, 171, 1)",
+    "rgba(250, 164, 58, 1)",
+    "rgba(253, 104, 104, 1)",
+    "rgba(83, 207, 201, 1)",
+    "rgba(162, 217, 37, 1)",
+    "rgba(222, 207, 63, 1)",
+    "rgba(115, 79, 233, 1)",
   ];
 
   function mapPveData() {

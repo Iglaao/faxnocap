@@ -1,10 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import "./Styles/NavBar.css";
-import "./Styles/Table.css";
-import "./Styles/Footer.css";
-import "./Styles/Card.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 

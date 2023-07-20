@@ -44,11 +44,25 @@ export default function BattleboardPage() {
     return (
       <>
         <NavBar />
-        <div className="table-style">
-          <BattleInfo battleboard={bb} />
-          <AllianceTable battleboard={Object.values(bb.Alliances)} />
-          <GuildTable battleboard={Object.values(bb.Guilds)} />
-          <PlayerTable battleboard={Object.values(bb.Players)} />
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-evenly",
+          }}
+        >
+          <div className="card">
+            <BattleInfo battleboard={bb} />
+          </div>
+          <div className="card">
+            <AllianceTable battleboard={Object.values(bb.Alliances)} />
+          </div>
+          <div className="card">
+            <GuildTable battleboard={Object.values(bb.Guilds)} />
+          </div>
+          <div className="card">
+            <PlayerTable battleboard={Object.values(bb.Players)} />
+          </div>
         </div>
       </>
     );

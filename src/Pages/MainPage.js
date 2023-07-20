@@ -3,13 +3,10 @@ import NavBar from "../Components/NavBar";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import SeasonSelect from "../Components/SeasonSelect";
-import BpvSelect from "../Components/BpvSelect";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
-import NextIcon from "../Icons/next_icon.svg";
-import DNextIcon from "../Icons/double_next_icon.svg";
-import PrevIcon from "../Icons/previous_icon.svg";
-import DPrevIcon from "../Icons/double_previous_icon.svg";
+import TableSelect from "../Components/TableSelect";
+import TableNavig from "../Components/TableNavig";
 
 export default function MainPage() {
   const [season, setSeason] = useState("s20");
@@ -52,22 +49,9 @@ export default function MainPage() {
     setOffset(0);
     setSlice(s);
   };
-  function incrementOffset() {
-    if (Math.floor(lastBattles.length / slice) === offset) return;
-    setOffset(offset + 1);
-  }
-
-  function decrementOffset() {
-    if (offset === 0) return;
-    setOffset(offset - 1);
-  }
-
-  function setOffsetToStart() {
-    setOffset(0);
-  }
-  function setOffsetToEnd() {
-    setOffset(Math.floor(lastBattles.length / slice));
-  }
+  const handleOffset = (s) => {
+    setOffset(s);
+  };
 
   const navigateToBB = (battleData) => {
     navigate("/battleboard", {
@@ -93,7 +77,7 @@ export default function MainPage() {
     return (
       <>
         <NavBar />
-        <SeasonSelect onSelectChange={handleSelect} selectedSeason={season} />
+        {/* <SeasonSelect onSelectChange={handleSelect} selectedSeason={season} /> */}
         <div className="table-style">
           <table>
             <thead>
@@ -131,31 +115,15 @@ export default function MainPage() {
             </tbody>
           </table>
         </div>
-        <BpvSelect onSelectChange={handleSlice} selectedAmount={slice} />
-        <button
-          style={{ backgroundColor: "transparent" }}
-          onClick={setOffsetToStart}
-        >
-          <img src={DPrevIcon} alt="Double Previous Icon" />
-        </button>
-        <button
-          style={{ backgroundColor: "transparent" }}
-          onClick={decrementOffset}
-        >
-          <img src={PrevIcon} alt="Previous Icon" />
-        </button>
-        <button
-          style={{ backgroundColor: "transparent" }}
-          onClick={incrementOffset}
-        >
-          <img src={NextIcon} alt="Next Icon" />
-        </button>
-        <button
-          style={{ backgroundColor: "transparent" }}
-          onClick={setOffsetToEnd}
-        >
-          <img src={DNextIcon} alt="Double Next Icon" />
-        </button>
+        <div className="table-navig">
+          <TableSelect onSelectChange={handleSlice} selectedAmount={slice} />
+          <TableNavig
+            onTableChange={handleOffset}
+            offsetValue={offset}
+            sliceValue={slice}
+            battles={lastBattles.length}
+          />
+        </div>
         <Footer />
       </>
     );

@@ -1,22 +1,7 @@
 import React from "react";
+import { formatValue } from "../FameFormatter";
 
 export default function PlayerCard(props) {
-  function formatValue(value) {
-    var formattedVal = 0;
-    if (value.toString().length > 9) {
-      formattedVal = value / 1000000000;
-      return formattedVal.toFixed(2) + "B";
-    }
-    if (value.toString().length > 6) {
-      formattedVal = value / 1000000;
-      return formattedVal.toFixed(2) + "M";
-    }
-    if (value.toString().length > 3) {
-      formattedVal = value / 1000;
-      return formattedVal.toFixed(2) + "K";
-    }
-    return value;
-  }
   return (
     <>
       <div className="card">
