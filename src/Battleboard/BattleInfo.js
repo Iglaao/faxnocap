@@ -2,7 +2,6 @@ import React from "react";
 
 export default function BattleInfo(props) {
   function ReturnDate(date) {
-    console.log(date);
     if (typeof date === "string") {
       return date.slice(0, 19).replaceAll("-", ".").replace("T", " ");
     } else {

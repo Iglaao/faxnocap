@@ -4,6 +4,8 @@ import BattleInfo from "../Battleboard/BattleInfo";
 import AllianceTable from "../Battleboard/AllianceTable";
 import GuildTable from "../Battleboard/GuildTable";
 import PlayersTable from "../Battleboard/PlayersTable";
+import InformationIcon from "../Icons/information_icon.svg";
+
 import {
   combineBattleboards,
   returnConvertedBattleboard,
@@ -54,7 +56,6 @@ export default function ViewerPage() {
   return (
     <>
       <NavBar />
-      <div>ViewerPage</div>
       <form onSubmit={handleFetch}>
         <input
           type="text"
@@ -65,7 +66,7 @@ export default function ViewerPage() {
         />
       </form>
       <div className="tooltip">
-        INFO
+        <img src={InformationIcon} alt="Information Icon" />
         <span className="tooltiptext">
           You can create combined killboard by entering ids separated with
           comma.

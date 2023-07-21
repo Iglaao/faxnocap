@@ -20,7 +20,6 @@ export default function BattleboardPage() {
     var docSnap = await getDoc(doc(db, season, battleTime));
     if (docSnap.exists()) {
       const collectionData = docSnap.data();
-      console.log(collectionData);
       const docData = Object.entries(collectionData).find(
         (x) => x[0] === battleId
       )[1];

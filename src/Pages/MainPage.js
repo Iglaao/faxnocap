@@ -7,13 +7,19 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
 import TableSelect from "../Components/TableSelect";
 import TableNavig from "../Components/TableNavig";
+import DataChart from "../Components/DataChart";
+import { getDataMap } from "../ChartFunctions";
+import GuildLogo from "../Images/fax_logo.png";
+import GuildInfoTable from "../Battleboard/GuildInfoTable";
 
 export default function MainPage() {
   const [season, setSeason] = useState("s20");
   const [lastBattles, setLastBattles] = useState();
+  const [guildStats, setGuildStats] = useState();
   const [offset, setOffset] = useState(0);
   const [slice, setSlice] = useState(10);
   const navigate = useNavigate();
+  const famePaths = ["KillFame", "DeathFame"];
 
   async function fetchLastBattles() {
     var docSnap = await getDoc(doc(db, season + "dict", "dict"));
@@ -38,13 +44,36 @@ export default function MainPage() {
       setLastBattles(null);
     }
   }
+  async function fetchGuildStatistics() {
+    var docSnap = await getDoc(doc(db, season, "stats"));
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      setGuildStats(data);
+    } else {
+      setLastBattles(null);
+    }
+  }
+
+  function getLastGuildData() {
+    var lastData = Object.entries(guildStats)
+      .sort((a, b) => {
+        if (typeof a[0] === "string" && typeof b[0] === "string") {
+          const dateA = a[0].split(".").reverse().join("");
+          const dateB = b[0].split(".").reverse().join("");
+          return dateA.localeCompare(dateB);
+        } else {
+          return 0;
+        }
+      })
+      .pop();
+    return lastData[1];
+  }
 
   const handleSelect = (s) => {
     setLastBattles(null);
     setSeason(s);
     fetchLastBattles();
   };
-
   const handleSlice = (s) => {
     setOffset(0);
     setSlice(s);
@@ -71,13 +100,29 @@ export default function MainPage() {
 
   useEffect(() => {
     fetchLastBattles();
+    fetchGuildStatistics();
   }, [slice, season]);
 
-  if (lastBattles) {
+  if (lastBattles && guildStats) {
     return (
       <>
         <NavBar />
         {/* <SeasonSelect onSelectChange={handleSelect} selectedSeason={season} /> */}
+        <div className="card">
+          <img
+            style={{
+              height: "200px",
+              width: "200px",
+            }}
+            src={GuildLogo}
+            alt="Guild Logo"
+          />
+          <GuildInfoTable values={getLastGuildData()} />
+        </div>
+        <div className="card">
+          <div className="title">Guild PvP Fame</div>
+          <DataChart values={getDataMap(guildStats, famePaths)} />
+        </div>
         <div className="table-style">
           <table>
             <thead>

@@ -61,7 +61,7 @@ export default function PlayerStatsPage({ match }) {
   useEffect(() => {
     fetchPlayerStats();
   }, []);
-  console.log(lastData);
+
   if (playerData && lastData) {
     return (
       <>
