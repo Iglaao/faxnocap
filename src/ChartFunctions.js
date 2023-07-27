@@ -1,3 +1,31 @@
+const gatheringPaths = [
+  "LifetimeStatistics.FishingFame",
+  "LifetimeStatistics.Gathering.All.Total",
+  "LifetimeStatistics.Gathering.Fiber.Total",
+  "LifetimeStatistics.Gathering.Hide.Total",
+  "LifetimeStatistics.Gathering.Ore.Total",
+  "LifetimeStatistics.Gathering.Rock.Total",
+  "LifetimeStatistics.Gathering.Wood.Total",
+];
+const pvePaths = [
+  "LifetimeStatistics.PvE.Avalon",
+  "LifetimeStatistics.PvE.CorruptedDungeon",
+  "LifetimeStatistics.PvE.Hellgate",
+  "LifetimeStatistics.PvE.Mists",
+  "LifetimeStatistics.PvE.Outlands",
+  "LifetimeStatistics.PvE.Royal",
+  "LifetimeStatistics.PvE.Total",
+];
+const pvpPaths = ["KillFame", "DeathFame"];
+const attendancePath = ["Attendance"];
+
+function getPaths(type) {
+  if (type === "pve") return pvePaths;
+  else if (type === "gathering") return gatheringPaths;
+  else if (type === "attendance") return attendancePath;
+  else if (type === "pvp") return pvpPaths;
+}
+
 export function getValueFromData(data, path) {
   var keys = path.split(".");
   let value = data;
@@ -11,9 +39,16 @@ export function getValueFromData(data, path) {
   return value;
 }
 
-export function getDataMap(data, paths, skip) {
+/**
+ * Retrive specific data.
+ * @param  {Object} data Players data
+ * @param  {String} type pve/gathering/attendance/pvp
+ * @param  {Boolean} skip Skip data without values
+ * @return {}      Returns map with players data
+ */
+export function getDataMap(data, type, skip) {
   var dataArr = [];
-  var pathsArr = Array.from(paths);
+  var pathsArr = Array.from(getPaths(type));
   var name = "";
   pathsArr.forEach((path) => {
     var dataSerie = [];

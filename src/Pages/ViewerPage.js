@@ -10,6 +10,7 @@ import {
   combineBattleboards,
   returnConvertedBattleboard,
 } from "../AlbionApiParser";
+import Footer from "../Components/Footer";
 
 export default function ViewerPage() {
   const [battleId, setBattleId] = useState("");
@@ -56,23 +57,26 @@ export default function ViewerPage() {
   return (
     <>
       <NavBar />
-      <form onSubmit={handleFetch}>
-        <input
-          type="text"
-          id="id-input"
-          value={battleId}
-          placeholder={"Enter battle id"}
-          onChange={(e) => setBattleId(e.target.value)}
-        />
-      </form>
-      <div className="tooltip">
-        <img src={InformationIcon} alt="Information Icon" />
-        <span className="tooltiptext">
-          You can create combined killboard by entering ids separated with
-          comma.
-        </span>
+      <div className="input-tooltip">
+        <form onSubmit={handleFetch}>
+          <input
+            type="text"
+            id="id-input"
+            value={battleId}
+            placeholder={"Enter battle id"}
+            onChange={(e) => setBattleId(e.target.value)}
+          />
+        </form>
+        <div className="tooltip">
+          <img src={InformationIcon} alt="Information Icon" />
+          <span className="tooltiptext">
+            You can create combined killboard by entering ids separated with
+            comma.
+          </span>
+        </div>
       </div>
       <ShowBattleboard />
+      <Footer />
     </>
   );
 }

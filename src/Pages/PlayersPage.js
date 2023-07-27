@@ -4,6 +4,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useLocation, useNavigate } from "react-router-dom";
 import SearchBar from "../Components/SearchBar";
+import Footer from "../Components/Footer";
 
 export default function PlayersPage() {
   const [players, setPlayers] = useState();
@@ -53,12 +54,7 @@ export default function PlayersPage() {
       <>
         <NavBar />
         <SearchBar keyword={keyword} onChange={updateKeyword} />
-        <div
-          style={{
-            overflowY: "scroll",
-            height: "100vh",
-          }}
-        >
+        <div className="table-scroll">
           <div className="table-style">
             <table>
               <thead>
@@ -85,6 +81,7 @@ export default function PlayersPage() {
             </table>
           </div>
         </div>
+        <Footer />
       </>
     );
   } else {

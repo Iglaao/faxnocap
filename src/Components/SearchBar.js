@@ -5,7 +5,7 @@ export default function SearchBar({ keyword, onChange }) {
     <input
       key="search-bar"
       value={keyword}
-      placeholder={"search player"}
+      placeholder={"Find player"}
       onChange={(e) => onChange(e.target.value)}
     />
   );

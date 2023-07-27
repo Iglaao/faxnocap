@@ -32,3 +32,16 @@
 .table-select option {
   background-color: rgb(30, 38, 43);
 }
+
+.table-scroll tbody {
+  display: block;
+  height: 75vh;
+  overflow-y: auto;
+}
+
+.table-scroll thead,
+.table-scroll tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}

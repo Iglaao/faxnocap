@@ -7,33 +7,13 @@ import DataChart from "../Components/DataChart";
 import { getAggregatedData, getDataMap } from "../ChartFunctions";
 import PieChart from "../Components/PieChart";
 import PlayerCard from "../Components/PlayerCard";
+import Footer from "../Components/Footer";
 
 export default function PlayerStatsPage({ match }) {
   const playerName = useParams().playerName;
   const [playerData, setPlayerData] = useState();
   const [lastData, setLastData] = useState();
-
   const season = "s20";
-  const gatheringPaths = [
-    "LifetimeStatistics.FishingFame",
-    "LifetimeStatistics.Gathering.All.Total",
-    "LifetimeStatistics.Gathering.Fiber.Total",
-    "LifetimeStatistics.Gathering.Hide.Total",
-    "LifetimeStatistics.Gathering.Ore.Total",
-    "LifetimeStatistics.Gathering.Rock.Total",
-    "LifetimeStatistics.Gathering.Wood.Total",
-  ];
-  const pvePaths = [
-    "LifetimeStatistics.PvE.Avalon",
-    "LifetimeStatistics.PvE.CorruptedDungeon",
-    "LifetimeStatistics.PvE.Hellgate",
-    "LifetimeStatistics.PvE.Mists",
-    "LifetimeStatistics.PvE.Outlands",
-    "LifetimeStatistics.PvE.Royal",
-    "LifetimeStatistics.PvE.Total",
-  ];
-  const attendancePath = ["Attendance"];
-  const famePaths = ["KillFame", "DeathFame"];
 
   async function fetchPlayerStats() {
     var docSnap = await getDoc(doc(db, season + "members", playerName));
@@ -76,23 +56,23 @@ export default function PlayerStatsPage({ match }) {
           <PlayerCard values={lastData} />
           <div className="card">
             <div className="title">Attendance per day</div>
-            <DataChart values={getDataMap(playerData, attendancePath)} />
+            <DataChart values={getDataMap(playerData, "attendance")} />
           </div>
           <div className="card">
             <div className="title">Attendance</div>
-            <DataChart values={getAggregatedData(playerData, attendancePath)} />
+            <DataChart values={getAggregatedData(playerData, "attendance")} />
           </div>
           <div className="card">
             <div className="title">PvP Fame</div>
-            <DataChart values={getDataMap(playerData, famePaths, true)} />
+            <DataChart values={getDataMap(playerData, "pvp", true)} />
           </div>
           <div className="card">
             <div className="title">Gathering Fame</div>
-            <DataChart values={getDataMap(playerData, gatheringPaths, true)} />
+            <DataChart values={getDataMap(playerData, "gathering", true)} />
           </div>
           <div className="card">
             <div className="title">PvE Fame</div>
-            <DataChart values={getDataMap(playerData, pvePaths, true)} />
+            <DataChart values={getDataMap(playerData, "pve", true)} />
           </div>
           <div className="card">
             <div className="title">PvE</div>
@@ -103,6 +83,7 @@ export default function PlayerStatsPage({ match }) {
             <PieChart values={lastData.LifetimeStatistics} type={"gathering"} />
           </div>
         </div>
+        <Footer />
       </>
     );
   }

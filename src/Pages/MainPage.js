@@ -19,7 +19,6 @@ export default function MainPage() {
   const [offset, setOffset] = useState(0);
   const [slice, setSlice] = useState(10);
   const navigate = useNavigate();
-  const famePaths = ["KillFame", "DeathFame"];
 
   async function fetchLastBattles() {
     var docSnap = await getDoc(doc(db, season + "dict", "dict"));
@@ -108,66 +107,81 @@ export default function MainPage() {
       <>
         <NavBar />
         {/* <SeasonSelect onSelectChange={handleSelect} selectedSeason={season} /> */}
-        <div className="card">
-          <img
-            style={{
-              height: "200px",
-              width: "200px",
-            }}
-            src={GuildLogo}
-            alt="Guild Logo"
-          />
-          <GuildInfoTable values={getLastGuildData()} />
-        </div>
-        <div className="card">
-          <div className="title">Guild PvP Fame</div>
-          <DataChart values={getDataMap(guildStats, famePaths)} />
-        </div>
-        <div className="table-style">
-          <table>
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {lastBattles
-                .slice(offset * slice, (offset + 1) * slice)
-                .map((battle, index) => (
-                  <tr key={index}>
-                    <td style={{ textAlign: "left" }}>
-                      <a
-                        href=""
-                        onClick={() => {
-                          navigateToBB(battle);
-                        }}
-                      >
-                        {battle[1].Title}
-                      </a>
-                    </td>
-                    <td style={{ textAlign: "center" }}>
-                      {battle[1].StartTime.toDate()
-                        .toLocaleString("en-GB", {
-                          day: "2-digit",
-                          month: "2-digit",
-                          year: "numeric",
-                        })
-                        .replaceAll("/", ".")}
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
-        <div className="table-navig">
-          <TableSelect onSelectChange={handleSlice} selectedAmount={slice} />
-          <TableNavig
-            onTableChange={handleOffset}
-            offsetValue={offset}
-            sliceValue={slice}
-            battles={lastBattles.length}
-          />
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            width: "90%",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          <div>
+            <div className="card">
+              <img
+                style={{
+                  height: "200px",
+                  width: "200px",
+                }}
+                src={GuildLogo}
+                alt="Guild Logo"
+              />
+              <GuildInfoTable values={getLastGuildData()} />
+            </div>
+            <div className="card">
+              <div className="title">Guild PvP Fame</div>
+              <DataChart values={getDataMap(guildStats, "pvp")} />
+            </div>
+          </div>
+          <div className="table-style">
+            <table>
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {lastBattles
+                  .slice(offset * slice, (offset + 1) * slice)
+                  .map((battle, index) => (
+                    <tr key={index}>
+                      <td style={{ textAlign: "left" }}>
+                        <a
+                          href=""
+                          onClick={() => {
+                            navigateToBB(battle);
+                          }}
+                        >
+                          {battle[1].Title}
+                        </a>
+                      </td>
+                      <td style={{ textAlign: "center" }}>
+                        {battle[1].StartTime.toDate()
+                          .toLocaleString("en-GB", {
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "numeric",
+                          })
+                          .replaceAll("/", ".")}
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+            <div className="table-navig">
+              <TableSelect
+                onSelectChange={handleSlice}
+                selectedAmount={slice}
+              />
+              <TableNavig
+                onTableChange={handleOffset}
+                offsetValue={offset}
+                sliceValue={slice}
+                battles={lastBattles.length}
+              />
+            </div>
+          </div>
         </div>
         <Footer />
       </>

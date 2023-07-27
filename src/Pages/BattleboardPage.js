@@ -7,6 +7,7 @@ import { db } from "../firebase";
 import { collection, doc, getDoc, Timestamp } from "firebase/firestore";
 import NavBar from "../Components/NavBar";
 import { useLocation, useNavigate } from "react-router-dom";
+import Footer from "../Components/Footer";
 
 export default function BattleboardPage() {
   const [bb, setBB] = useState();
@@ -63,6 +64,7 @@ export default function BattleboardPage() {
             <PlayerTable battleboard={Object.values(bb.Players)} />
           </div>
         </div>
+        <Footer />
       </>
     );
   } else {
