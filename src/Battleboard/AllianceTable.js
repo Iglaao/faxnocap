@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import TableNavig from "../Components/TableNavig";
-import { formatValue } from "../FameFormatter";
+import { formatValue } from "../Functions/FameFormatter";
 
 export default function AllianceTable(props) {
   const [offset, setOffset] = useState(0);

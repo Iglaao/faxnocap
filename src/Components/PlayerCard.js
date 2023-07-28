@@ -1,5 +1,5 @@
 import React from "react";
-import { formatValue } from "../FameFormatter";
+import { formatValue } from "../Functions/FameFormatter";
 
 export default function PlayerCard(props) {
   return (

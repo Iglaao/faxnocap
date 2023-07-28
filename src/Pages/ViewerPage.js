@@ -9,7 +9,7 @@ import InformationIcon from "../Icons/information_icon.svg";
 import {
   combineBattleboards,
   returnConvertedBattleboard,
-} from "../AlbionApiParser";
+} from "../Functions/AlbionApiParser";
 import Footer from "../Components/Footer";
 
 export default function ViewerPage() {

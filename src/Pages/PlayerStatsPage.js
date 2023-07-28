@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import DataChart from "../Components/DataChart";
-import { getAggregatedData, getDataMap } from "../ChartFunctions";
+import { getAggregatedData, getDataMap } from "../Functions/ChartFunctions";
 import PieChart from "../Components/PieChart";
 import PlayerCard from "../Components/PlayerCard";
 import Footer from "../Components/Footer";

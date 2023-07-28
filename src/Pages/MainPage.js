@@ -3,22 +3,17 @@ import NavBar from "../Components/NavBar";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import SeasonSelect from "../Components/SeasonSelect";
-import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
-import TableSelect from "../Components/TableSelect";
-import TableNavig from "../Components/TableNavig";
 import DataChart from "../Components/DataChart";
-import { getDataMap } from "../ChartFunctions";
+import { getDataMap } from "../Functions/ChartFunctions";
 import GuildLogo from "../Images/fax_logo.png";
 import GuildInfoTable from "../Battleboard/GuildInfoTable";
+import BattlesTable from "../Battleboard/BattlesTable";
 
 export default function MainPage() {
   const [season, setSeason] = useState("s20");
   const [lastBattles, setLastBattles] = useState();
   const [guildStats, setGuildStats] = useState();
-  const [offset, setOffset] = useState(0);
-  const [slice, setSlice] = useState(10);
-  const navigate = useNavigate();
 
   async function fetchLastBattles() {
     var docSnap = await getDoc(doc(db, season + "dict", "dict"));
@@ -73,34 +68,11 @@ export default function MainPage() {
     setSeason(s);
     fetchLastBattles();
   };
-  const handleSlice = (s) => {
-    setOffset(0);
-    setSlice(s);
-  };
-  const handleOffset = (s) => {
-    setOffset(s);
-  };
-
-  const navigateToBB = (battleData) => {
-    navigate("/battleboard", {
-      state: {
-        id: battleData[0],
-        date: battleData[1].StartTime.toDate()
-          .toLocaleString("en-GB", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-          })
-          .replaceAll("/", "."),
-        season: season,
-      },
-    });
-  };
 
   useEffect(() => {
     fetchLastBattles();
     fetchGuildStatistics();
-  }, [slice, season]);
+  }, []);
 
   if (lastBattles && guildStats) {
     return (
@@ -110,13 +82,13 @@ export default function MainPage() {
         <div
           style={{
             display: "flex",
-            flexWrap: "wrap",
+            flexDirection: "row",
             width: "90%",
             marginLeft: "auto",
             marginRight: "auto",
           }}
         >
-          <div>
+          <div style={{ paddingRight: "10px" }}>
             <div className="card">
               <img
                 style={{
@@ -133,54 +105,12 @@ export default function MainPage() {
               <DataChart values={getDataMap(guildStats, "pvp")} />
             </div>
           </div>
-          <div className="table-style">
-            <table>
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {lastBattles
-                  .slice(offset * slice, (offset + 1) * slice)
-                  .map((battle, index) => (
-                    <tr key={index}>
-                      <td style={{ textAlign: "left" }}>
-                        <a
-                          href=""
-                          onClick={() => {
-                            navigateToBB(battle);
-                          }}
-                        >
-                          {battle[1].Title}
-                        </a>
-                      </td>
-                      <td style={{ textAlign: "center" }}>
-                        {battle[1].StartTime.toDate()
-                          .toLocaleString("en-GB", {
-                            day: "2-digit",
-                            month: "2-digit",
-                            year: "numeric",
-                          })
-                          .replaceAll("/", ".")}
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-            <div className="table-navig">
-              <TableSelect
-                onSelectChange={handleSlice}
-                selectedAmount={slice}
-              />
-              <TableNavig
-                onTableChange={handleOffset}
-                offsetValue={offset}
-                sliceValue={slice}
-                battles={lastBattles.length}
-              />
-            </div>
+          <div
+            className="card"
+            style={{ width: "100%", minHeight: "340px", height: "100%" }}
+          >
+            <div className="title">Last battles</div>
+            <BattlesTable battles={lastBattles} season={season} />
           </div>
         </div>
         <Footer />

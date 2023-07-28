@@ -1,3 +1,9 @@
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
 .App {
   text-align: center;
   background-image: url("./Images/fax_backgroundv2.png");
