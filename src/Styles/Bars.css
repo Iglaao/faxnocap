@@ -1,0 +1,63 @@
+.bars {
+  justify-items: start;
+  display: flex;
+  flex-direction: column;
+}
+.bars .bar-Players {
+  background-color: rgb(41, 175, 224);
+}
+.bars .bar-Kills {
+  background-color: rgb(224, 41, 78);
+}
+.bars .bar-KillFame {
+  background-color: rgb(41, 224, 157);
+}
+.bars .bar-Players,
+.bars .bar-Kills,
+.bars .bar-KillFame {
+  margin: 2px;
+  font-size: small;
+  border-radius: 5px;
+  height: 15px;
+  position: relative;
+  display: inline-block;
+}
+.bars .bar-Players .bartooltip,
+.bars .bar-Kills .bartooltip,
+.bars .bar-KillFame .bartooltip {
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  background-color: rgb(30, 38, 43);
+  border-radius: 5px;
+  color: white;
+  padding: 5px 10px;
+  margin: 0px 6px 0px 0px;
+  top: -50%;
+  right: 100%;
+}
+.bars .bar-Players .bartooltip::after,
+.bars .bar-Kills .bartooltip::after,
+.bars .bar-KillFame .bartooltip::after {
+  content: "";
+  position: absolute;
+  top: 40%;
+  left: 100%;
+  border: 6px solid;
+  border-color: transparent transparent transparent rgb(30, 38, 43);
+}
+.bars .bar-Players:hover .bartooltip,
+.bars .bar-Kills:hover .bartooltip,
+.bars .bar-KillFame:hover .bartooltip {
+  visibility: visible;
+}
+
+.space-items {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.barstext {
+  margin: 0px 0px 0px 10px;
+}

@@ -5,6 +5,7 @@ import "./Styles/Footer.css";
 import "./Styles/Card.css";
 import "./Styles/Tooltip.css";
 import "./Styles/Input.css";
+import "./Styles/Bars.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainPage from "./Pages/MainPage";
 import BattleboardPage from "./Pages/BattleboardPage";

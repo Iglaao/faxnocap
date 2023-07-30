@@ -12,6 +12,7 @@
 }
 .table-style table th,
 .table-style table td {
+  word-break: break-word;
   border-bottom: 2px solid transparent;
 }
 .table-style tr:nth-child(even) {

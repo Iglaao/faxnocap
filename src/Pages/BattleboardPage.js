@@ -4,10 +4,11 @@ import AllianceTable from "../Battleboard/AllianceTable";
 import GuildTable from "../Battleboard/GuildTable";
 import PlayerTable from "../Battleboard/PlayersTable";
 import { db } from "../firebase";
-import { collection, doc, getDoc, Timestamp } from "firebase/firestore";
+import { doc, getDoc, Timestamp } from "firebase/firestore";
 import NavBar from "../Components/NavBar";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Footer from "../Components/Footer";
+import MostChart from "../Components/MostChart";
 
 export default function BattleboardPage() {
   const [bb, setBB] = useState();
@@ -15,7 +16,6 @@ export default function BattleboardPage() {
   const battleId = location.state?.id;
   const battleTime = location.state?.date;
   const season = location.state?.season;
-  const navigate = useNavigate();
 
   async function fetchBattleboard() {
     var docSnap = await getDoc(doc(db, season, battleTime));
@@ -36,6 +36,19 @@ export default function BattleboardPage() {
     }
   }
 
+  //atr = Players/Kills/Deaths
+  function getMostData(data, atr) {
+    var guilds = Object.values(data.Guilds).filter(
+      (guild) => guild.Alliance === ""
+    );
+    var alliances = Object.values(data.Alliances);
+    var all = [...guilds, ...alliances].sort((a, b) => {
+      return b[atr] - a[atr];
+    });
+    var top = all.splice(0, 3);
+    return { max: top[0][atr], data: top };
+  }
+
   useEffect(() => {
     fetchBattleboard();
   }, []);
@@ -51,6 +64,15 @@ export default function BattleboardPage() {
             justifyContent: "space-evenly",
           }}
         >
+          <div className="card">
+            <MostChart data={getMostData(bb, "Players")} atr={"Players"} />
+          </div>
+          <div className="card">
+            <MostChart data={getMostData(bb, "Kills")} atr={"Kills"} />
+          </div>
+          <div className="card">
+            <MostChart data={getMostData(bb, "KillFame")} atr={"KillFame"} />
+          </div>
           <div className="card">
             <BattleInfo battleboard={bb} />
           </div>
