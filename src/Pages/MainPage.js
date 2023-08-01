@@ -7,8 +7,8 @@ import Footer from "../Components/Footer";
 import DataChart from "../Components/DataChart";
 import { getDataMap } from "../Functions/ChartFunctions";
 import GuildLogo from "../Images/fax_logo.png";
-import GuildInfoTable from "../Battleboard/GuildInfoTable";
-import BattlesTable from "../Battleboard/BattlesTable";
+import GuildInfoTable from "../Tables/GuildInfoTable";
+import BattlesTable from "../Tables/BattlesTable";
 
 export default function MainPage() {
   const [season, setSeason] = useState("s20");

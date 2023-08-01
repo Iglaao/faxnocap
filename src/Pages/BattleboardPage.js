@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import BattleInfo from "../Battleboard/BattleInfo";
-import AllianceTable from "../Battleboard/AllianceTable";
-import GuildTable from "../Battleboard/GuildTable";
-import PlayerTable from "../Battleboard/PlayersTable";
+import BattleInfo from "../Tables/Battleboard/BattleInfo";
+import AllianceTable from "../Tables/Battleboard/AllianceTable";
+import GuildTable from "../Tables/Battleboard/GuildTable";
+import PlayerTable from "../Tables/Battleboard/PlayersTable";
 import { db } from "../firebase";
 import { doc, getDoc, Timestamp } from "firebase/firestore";
 import NavBar from "../Components/NavBar";

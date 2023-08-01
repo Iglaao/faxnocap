@@ -51,3 +51,15 @@
   width: 100%;
   table-layout: fixed;
 }
+
+.table-style table button {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  background-color: transparent;
+  color: white;
+  text-shadow: 0px 0px 2px black, -2px -2px 2px black, 2px -2px 2px black,
+    -2px 2px 2px black, 2px 2px 2px black;
+  text-align: center;
+  align-items: center;
+}

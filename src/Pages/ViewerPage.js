@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import NavBar from "../Components/NavBar";
-import BattleInfo from "../Battleboard/BattleInfo";
-import AllianceTable from "../Battleboard/AllianceTable";
-import GuildTable from "../Battleboard/GuildTable";
-import PlayersTable from "../Battleboard/PlayersTable";
+import BattleInfo from "../Tables/Battleboard/BattleInfo";
+import AllianceTable from "../Tables/Battleboard/AllianceTable";
+import GuildTable from "../Tables/Battleboard/GuildTable";
+import PlayersTable from "../Tables/Battleboard/PlayersTable";
 import InformationIcon from "../Icons/information_icon.svg";
 
 import {

@@ -12,6 +12,7 @@ import BattleboardPage from "./Pages/BattleboardPage";
 import PlayersPage from "./Pages/PlayersPage";
 import PlayerStatsPage from "./Pages/PlayerStatsPage";
 import ViewerPage from "./Pages/ViewerPage";
+import Footer from "./Components/Footer";
 
 function App() {
   return (
