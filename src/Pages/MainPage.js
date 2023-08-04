@@ -79,25 +79,10 @@ export default function MainPage() {
       <>
         <NavBar />
         {/* <SeasonSelect onSelectChange={handleSelect} selectedSeason={season} /> */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            width: "90%",
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        >
-          <div style={{ paddingRight: "10px" }}>
-            <div className="card">
-              <img
-                style={{
-                  height: "200px",
-                  width: "200px",
-                }}
-                src={GuildLogo}
-                alt="Guild Logo"
-              />
+        <div className="mainpage">
+          <div className="guild">
+            <div className="card" style={{ padding: "10px 0px 10px 0px" }}>
+              <img className="logo" src={GuildLogo} alt="Guild Logo" />
               <GuildInfoTable values={getLastGuildData()} />
             </div>
             <div className="card">
@@ -105,10 +90,7 @@ export default function MainPage() {
               <DataChart values={getDataMap(guildStats, "pvp")} />
             </div>
           </div>
-          <div
-            className="card"
-            style={{ width: "100%", minHeight: "340px", height: "100%" }}
-          >
+          <div className="card" style={{ width: "100%", height: "100%" }}>
             <div className="title">Last battles</div>
             <BattlesTable battles={lastBattles} season={season} />
           </div>
@@ -122,6 +104,7 @@ export default function MainPage() {
         <NavBar />
         <SeasonSelect onSelectChange={handleSelect} selectedSeason={season} />
         <div>Empty</div>
+        <Footer />
       </>
     );
   }

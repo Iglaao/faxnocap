@@ -65,6 +65,10 @@ export default function BattleboardPage() {
           }}
         >
           <div className="card">
+            <div className="title">Battle info:</div>
+            <BattleInfo battleboard={bb} />
+          </div>
+          <div className="card">
             <MostChart data={getMostData(bb, "Players")} atr={"Players"} />
           </div>
           <div className="card">
@@ -73,16 +77,17 @@ export default function BattleboardPage() {
           <div className="card">
             <MostChart data={getMostData(bb, "KillFame")} atr={"KillFame"} />
           </div>
-          <div className="card">
-            <BattleInfo battleboard={bb} />
-          </div>
-          <div className="card">
+
+          <div className="card cardbattletable">
+            <div className="title">Alliances:</div>
             <AllianceTable battleboard={Object.values(bb.Alliances)} />
           </div>
-          <div className="card">
+          <div className="card cardbattletable">
+            <div className="title">Guilds:</div>
             <GuildTable battleboard={Object.values(bb.Guilds)} />
           </div>
-          <div className="card">
+          <div className="card cardbattletable">
+            <div className="title">Players:</div>
             <PlayerTable battleboard={Object.values(bb.Players)} />
           </div>
         </div>

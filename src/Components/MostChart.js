@@ -18,9 +18,11 @@ export default function MostChart(props) {
 
   return (
     <>
-      <div>
+      <div style={{ padding: "7px" }}>
         <div className="space-items" style={{ marginBottom: "15px" }}>
-          <div>Most {props.atr.replace("KillFame", "Fame")}</div>
+          <div style={{ fontWeight: "bold" }}>
+            Most {props.atr.replace("KillFame", "Fame")}
+          </div>
           <img
             style={{ paddingRight: "0px" }}
             src={returnIcon(props.atr)}

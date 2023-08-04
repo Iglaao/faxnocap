@@ -1,5 +1,6 @@
 .table-style {
   width: 100%;
+  padding-bottom: 10px;
 }
 .table-style table {
   backdrop-filter: blur(5px);
@@ -14,6 +15,17 @@
 .table-style table td {
   word-break: break-word;
   border-bottom: 2px solid transparent;
+}
+table .battleHeader {
+  display: flex;
+  white-space: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 30px;
+  padding-left: 5px;
+}
+table .battleData {
+  padding-right: 5px;
 }
 .table-style tr:nth-child(even) {
   background-color: rgba(30, 38, 43, 0.3);
@@ -39,6 +51,11 @@
   background-color: rgb(30, 38, 43);
 }
 
+.table-scroll {
+  width: 90%;
+  margin-right: auto;
+  margin-left: auto;
+}
 .table-scroll tbody {
   display: block;
   height: 75vh;

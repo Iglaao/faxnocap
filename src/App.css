@@ -22,3 +22,50 @@ a:visited {
   text-decoration: none;
   color: inherit;
 }
+
+img {
+  height: 20px;
+  width: 20px;
+  padding-right: 5px;
+}
+
+img.logo {
+  padding: 0px;
+  width: 158px;
+  height: 180px;
+  border-radius: 30px;
+}
+.mainpage {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.mainpage .guild {
+  display: flex;
+  flex-direction: column;
+  padding-right: 10px;
+}
+@media screen and (max-width: 1150px) {
+  .mainpage {
+    display: flex;
+    flex-direction: column;
+  }
+  .mainpage .guild {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+@media screen and (max-width: 900px) {
+  .mainpage {
+    display: flex;
+    flex-direction: column;
+  }
+  .mainpage .guild {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -23,8 +23,9 @@ export default function DataChart(props) {
     <>
       <div
         style={{
-          height: "inherit",
-          width: "inherit",
+          height: "300px",
+          width: "100%",
+          marginBottom: "10px",
         }}
       >
         <Chart

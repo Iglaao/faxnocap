@@ -29,6 +29,7 @@ export default function AllianceTable(props) {
             <tr>
               <th>
                 <button
+                  style={{ justifyContent: "left", paddingLeft: "5px" }}
                   onClick={() => requestSort("Name")}
                   className={getClassNamesFor("Name")}
                 >
@@ -74,7 +75,9 @@ export default function AllianceTable(props) {
               .slice(offset * 10, (offset + 1) * 10)
               .map((alliance, index) => (
                 <tr key={index}>
-                  <td>{alliance.Name}</td>
+                  <td style={{ textAlign: "left", paddingLeft: "5px" }}>
+                    {alliance.Name}
+                  </td>
                   <td>{alliance.Players}</td>
                   <td>{alliance.Kills}</td>
                   <td>{alliance.Deaths}</td>

@@ -29,6 +29,7 @@ export default function GuildTable(props) {
             <tr>
               <th>
                 <button
+                  style={{ justifyContent: "left", paddingLeft: "5px" }}
                   onClick={() => requestSort("Name")}
                   className={getClassNamesFor("Name")}
                 >
@@ -80,7 +81,9 @@ export default function GuildTable(props) {
           <tbody>
             {items.slice(offset * 10, (offset + 1) * 10).map((guild, index) => (
               <tr key={index}>
-                <td>{guild.Name}</td>
+                <td style={{ textAlign: "left", paddingLeft: "5px" }}>
+                  {guild.Name}
+                </td>
                 <td>{guild.Alliance}</td>
                 <td>{guild.Players}</td>
                 <td>{guild.Kills}</td>
