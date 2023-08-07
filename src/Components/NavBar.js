@@ -5,6 +5,7 @@ import HomeIcon from "../Icons/home_icon.svg";
 import SearchIcon from "../Icons/search_icon.svg";
 import UsersIcon from "../Icons/users_icon.svg";
 import HamburgerIcon from "../Icons/hamburger_icon.svg";
+import RankingIcon from "../Icons/ranking_icon.svg";
 
 export default function NavBar() {
   const toggleButton = useRef(null);
@@ -22,6 +23,10 @@ export default function NavBar() {
     navigate("/battleviewer");
   };
 
+  const navigateToAttendance = () => {
+    navigate("/attendance");
+  };
+
   const handleDiscordButton = () => {
     window.open("https://discord.gg/faxnocap", "_blank");
   };
@@ -32,7 +37,6 @@ export default function NavBar() {
     toggleButton.current.addEventListener("click", () => {
       navRightButtons.classList.toggle("active");
       navLeftButtons.classList.toggle("active");
-      console.log("click");
     });
   }, []);
 
@@ -53,6 +57,12 @@ export default function NavBar() {
             <button onClick={navigateToPlayers}>
               <img src={UsersIcon} alt="Users Icon" />
               Player Stats
+            </button>
+          </div>
+          <div className="left-side navbtn">
+            <button onClick={navigateToAttendance}>
+              <img src={RankingIcon} alt="Ranking Icon" />
+              Attendance
             </button>
           </div>
           <div className="left-side navbtn">
