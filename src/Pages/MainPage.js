@@ -81,11 +81,14 @@ export default function MainPage() {
         {/* <SeasonSelect onSelectChange={handleSelect} selectedSeason={season} /> */}
         <div className="mainpage">
           <div className="guild">
-            <div className="card" style={{ padding: "10px 0px 10px 0px" }}>
+            <div
+              className="card"
+              style={{ width: "100%", padding: "10px 0px 10px 0px" }}
+            >
               <img className="logo" src={GuildLogo} alt="Guild Logo" />
               <GuildInfoTable values={getLastGuildData()} />
             </div>
-            <div className="card">
+            <div className="card" style={{ width: "100%" }}>
               <div className="title">Guild PvP Fame</div>
               <DataChart values={getDataMap(guildStats, "pvp")} />
             </div>
@@ -102,8 +105,7 @@ export default function MainPage() {
     return (
       <>
         <NavBar />
-        <SeasonSelect onSelectChange={handleSelect} selectedSeason={season} />
-        <div>Empty</div>
+        <div style={{ color: "white" }}>Empty</div>
         <Footer />
       </>
     );

@@ -3,6 +3,7 @@ import { formatValue } from "../Functions/FameFormatter";
 import PlayersIcon from "../Icons/Players_icon.svg";
 import KillsIcon from "../Icons/Kills_icon.svg";
 import KillFameIcon from "../Icons/KillFame_icon.svg";
+import DeathsIcon from "../Icons/tomb_icon.svg";
 
 export default function MostChart(props) {
   function display(atr, val) {
@@ -14,6 +15,7 @@ export default function MostChart(props) {
     if (atr === "Players") return PlayersIcon;
     else if (atr === "Kills") return KillsIcon;
     else if (atr === "KillFame") return KillFameIcon;
+    else if (atr === "Deaths") return DeathsIcon;
   }
 
   return (

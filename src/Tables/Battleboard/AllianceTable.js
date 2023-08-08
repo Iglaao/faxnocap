@@ -29,7 +29,7 @@ export default function AllianceTable(props) {
             <tr>
               <th>
                 <button
-                  style={{ justifyContent: "left", paddingLeft: "5px" }}
+                  style={{ justifyContent: "left" }}
                   onClick={() => requestSort("Name")}
                   className={getClassNamesFor("Name")}
                 >
@@ -81,7 +81,9 @@ export default function AllianceTable(props) {
                   <td>{alliance.Players}</td>
                   <td>{alliance.Kills}</td>
                   <td>{alliance.Deaths}</td>
-                  <td>{formatValue(alliance.KillFame)}</td>
+                  <td style={{ wordBreak: "keep-all" }}>
+                    {formatValue(alliance.KillFame)}
+                  </td>
                 </tr>
               ))}
           </tbody>

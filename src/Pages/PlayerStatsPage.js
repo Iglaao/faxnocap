@@ -42,7 +42,7 @@ export default function PlayerStatsPage({ match }) {
     fetchPlayerStats();
   }, []);
 
-  if (playerData && lastData) {
+  if (playerData && lastData.LifetimeStatistics) {
     return (
       <>
         <NavBar />
@@ -83,6 +83,14 @@ export default function PlayerStatsPage({ match }) {
             <PieChart values={lastData.LifetimeStatistics} type={"gathering"} />
           </div>
         </div>
+        <Footer />
+      </>
+    );
+  } else {
+    return (
+      <>
+        <NavBar />
+        <div style={{ color: "white" }}>Empty</div>
         <Footer />
       </>
     );

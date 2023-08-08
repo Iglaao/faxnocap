@@ -3,7 +3,7 @@ import NavBar from "../Components/NavBar";
 import BattleInfo from "../Tables/Battleboard/BattleInfo";
 import AllianceTable from "../Tables/Battleboard/AllianceTable";
 import GuildTable from "../Tables/Battleboard/GuildTable";
-import PlayersTable from "../Tables/Battleboard/PlayersTable";
+import PlayerTable from "../Tables/Battleboard/PlayersTable";
 import InformationIcon from "../Icons/information_icon.svg";
 
 import {
@@ -11,6 +11,7 @@ import {
   returnConvertedBattleboard,
 } from "../Functions/AlbionApiParser";
 import Footer from "../Components/Footer";
+import MostChart from "../Components/MostChart";
 
 export default function ViewerPage() {
   const [battleId, setBattleId] = useState("");
@@ -18,7 +19,7 @@ export default function ViewerPage() {
 
   async function fetchData(id) {
     const response = fetch(
-      `https://cors-anywhere.herokuapp.com/https://gameinfo.albiononline.com/api/gameinfo/battles/${id}`,
+      `https://gameinfo.albiononline.com/api/gameinfo/battles/${id}`,
       {
         method: "GET",
         headers: {
@@ -28,6 +29,17 @@ export default function ViewerPage() {
       }
     );
     return (await response).json();
+  }
+  function getMostData(data, atr) {
+    var guilds = Object.values(data.Guilds).filter(
+      (guild) => guild.Alliance === ""
+    );
+    var alliances = Object.values(data.Alliances);
+    var all = [...guilds, ...alliances].sort((a, b) => {
+      return b[atr] - a[atr];
+    });
+    var top = all.splice(0, 3);
+    return { max: top[0][atr], data: top };
   }
 
   const handleFetch = async (event) => {
@@ -46,10 +58,52 @@ export default function ViewerPage() {
     if (battle) {
       return (
         <>
-          <BattleInfo battleboard={battle} />
-          <AllianceTable battleboard={Object.values(battle.Alliances)} />
-          <GuildTable battleboard={Object.values(battle.Guilds)} />
-          <PlayersTable battleboard={Object.values(battle.Players)} />
+          <div className="battlewrapper">
+            <div className="card">
+              <div className="title">Battle info:</div>
+              <BattleInfo battleboard={battle} />
+            </div>
+            <div className="most">
+              <div className="card">
+                <MostChart
+                  data={getMostData(battle, "Players")}
+                  atr={"Players"}
+                />
+              </div>
+              <div className="card">
+                <MostChart data={getMostData(battle, "Kills")} atr={"Kills"} />
+              </div>
+              <div className="card">
+                <MostChart
+                  data={getMostData(battle, "KillFame")}
+                  atr={"KillFame"}
+                />
+              </div>
+              <div className="card">
+                <MostChart
+                  data={getMostData(battle, "Deaths")}
+                  atr={"Deaths"}
+                />
+              </div>
+            </div>
+            <div className="algutabs">
+              <div className="card cardbattletable">
+                <div className="title">Alliances:</div>
+                <AllianceTable battleboard={Object.values(battle.Alliances)} />
+              </div>
+              <div className="card cardbattletable">
+                <div className="title">Guilds:</div>
+                <GuildTable battleboard={Object.values(battle.Guilds)} />
+              </div>
+            </div>
+            <div
+              className="card cardbattletable"
+              style={{ alignSelf: "center" }}
+            >
+              <div className="title">Players:</div>
+              <PlayerTable battleboard={Object.values(battle.Players)} />
+            </div>
+          </div>
         </>
       );
     }

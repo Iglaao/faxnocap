@@ -55,7 +55,7 @@ export default function BattlesTable(props) {
                       {battle[1].Title}
                     </a>
                   </td>
-                  <td style={{ textAlign: "center", wordWrap: "normal" }}>
+                  <td style={{ textAlign: "center", wordBreak: "keep-all" }}>
                     {battle[1].StartTime.toDate()
                       .toLocaleString("en-GB", {
                         day: "2-digit",

@@ -1,0 +1,19 @@
+.attendance {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.attendance .topcards {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+@media screen and (max-width: 1350px) {
+  .attendance .topcards {
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+}

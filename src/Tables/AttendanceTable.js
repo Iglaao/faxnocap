@@ -20,69 +20,73 @@ export default function AttendanceTable(props) {
 
   return (
     <>
-      <table style={{ color: "white" }}>
-        <thead>
-          <tr>
-            <th>i</th>
-            <th>
-              <button
-                style={{ justifyContent: "left", paddingLeft: "5px" }}
-                onClick={() => requestSort("Name")}
-                className={getClassNamesFor("Name")}
-              >
-                Name
-              </button>
-            </th>
-            <th>
-              <button
-                style={{ justifyContent: "left", paddingLeft: "5px" }}
-                onClick={() => requestSort("Kills")}
-                className={getClassNamesFor("Kills")}
-              >
-                Kills
-              </button>
-            </th>
-            <th>
-              <button
-                style={{ justifyContent: "left", paddingLeft: "5px" }}
-                onClick={() => requestSort("Deaths")}
-                className={getClassNamesFor("Deaths")}
-              >
-                Deaths
-              </button>
-            </th>
-            <th>
-              <button
-                style={{ justifyContent: "left", paddingLeft: "5px" }}
-                onClick={() => requestSort("Attendance")}
-                className={getClassNamesFor("Attendance")}
-              >
-                Attendance
-              </button>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((player, index) => (
-            <tr key={index}>
-              <td>{index}</td>
-              <td>
-                <a
-                  href=""
-                  onClick={() => {
-                    navigateToPlayer(player.Name);
+      <div className="table-style">
+        <table>
+          <thead>
+            <tr>
+              <th>i</th>
+              <th>
+                <button
+                  style={{
+                    justifyContent: "left",
                   }}
+                  onClick={() => requestSort("Name")}
+                  className={getClassNamesFor("Name")}
                 >
-                  {player.Name}
-                </a>
-              </td>
-              <td>{player.Kills}</td>
-              <td>{player.Deaths}</td>
-              <td>{player.Attendance}</td>
+                  Name
+                </button>
+              </th>
+              <th>
+                <button
+                  style={{ justifyContent: "center" }}
+                  onClick={() => requestSort("Kills")}
+                  className={getClassNamesFor("Kills")}
+                >
+                  Kills
+                </button>
+              </th>
+              <th>
+                <button
+                  style={{ justifyContent: "center" }}
+                  onClick={() => requestSort("Deaths")}
+                  className={getClassNamesFor("Deaths")}
+                >
+                  Deaths
+                </button>
+              </th>
+              <th>
+                <button
+                  style={{ justifyContent: "center" }}
+                  onClick={() => requestSort("Attendance")}
+                  className={getClassNamesFor("Attendance")}
+                >
+                  Attendance
+                </button>
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {items.map((player, index) => (
+              <tr key={index}>
+                <td style={{ textAlign: "center" }}>{index}</td>
+                <td style={{ textAlign: "left" }}>
+                  <a
+                    href=""
+                    onClick={() => {
+                      navigateToPlayer(player.Name);
+                    }}
+                  >
+                    {player.Name}
+                  </a>
+                </td>
+                <td style={{ paddingRight: "10px" }}>{player.Kills}</td>
+                <td style={{ paddingRight: "10px" }}>{player.Deaths}</td>
+                <td style={{ paddingRight: "10px" }}>{player.Attendance}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 }

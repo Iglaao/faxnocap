@@ -29,7 +29,7 @@ export default function GuildTable(props) {
             <tr>
               <th>
                 <button
-                  style={{ justifyContent: "left", paddingLeft: "5px" }}
+                  style={{ justifyContent: "left" }}
                   onClick={() => requestSort("Name")}
                   className={getClassNamesFor("Name")}
                 >
@@ -88,7 +88,9 @@ export default function GuildTable(props) {
                 <td>{guild.Players}</td>
                 <td>{guild.Kills}</td>
                 <td>{guild.Deaths}</td>
-                <td>{formatValue(guild.KillFame)}</td>
+                <td style={{ wordBreak: "keep-all" }}>
+                  {formatValue(guild.KillFame)}
+                </td>
               </tr>
             ))}
           </tbody>

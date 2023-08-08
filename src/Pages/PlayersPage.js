@@ -88,7 +88,8 @@ export default function PlayersPage() {
     return (
       <>
         <NavBar />
-        <div>Empty</div>
+        <div style={{ color: "white" }}>Empty</div>
+        <Footer />
       </>
     );
   }

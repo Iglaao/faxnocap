@@ -18,3 +18,9 @@ footer img {
   padding-left: 5px;
   padding-right: 1px;
 }
+
+@media screen and (max-width: 790px) {
+  footer {
+    width: 100%;
+  }
+}

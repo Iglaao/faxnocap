@@ -7,19 +7,19 @@ export default function GuildInfoTable(props) {
       <table>
         <tbody>
           <tr>
-            <th>Guild Name:</th>
+            <th style={{ textAlign: "left" }}>Guild Name:</th>
             <td>{props.values.Name}</td>
           </tr>
           <tr>
-            <th>Alliance Name:</th>
+            <th style={{ textAlign: "left" }}>Alliance Name:</th>
             <td>{props.values.AllianceTag}</td>
           </tr>
           <tr>
-            <th>Kill Fame:</th>
+            <th style={{ textAlign: "left" }}>Kill Fame:</th>
             <td>{formatValue(props.values.KillFame)}</td>
           </tr>
           <tr>
-            <th>Death Fame:</th>
+            <th style={{ textAlign: "left" }}>Death Fame:</th>
             <td>{formatValue(props.values.DeathFame)}</td>
           </tr>
         </tbody>

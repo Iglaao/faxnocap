@@ -29,7 +29,7 @@ export default function PlayersTable(props) {
             <tr>
               <th>
                 <button
-                  style={{ justifyContent: "left", paddingLeft: "5px" }}
+                  style={{ justifyContent: "left" }}
                   onClick={() => requestSort("Name")}
                   className={getClassNamesFor("Name")}
                 >
@@ -38,7 +38,7 @@ export default function PlayersTable(props) {
               </th>
               <th>
                 <button
-                  style={{ justifyContent: "left", paddingLeft: "5px" }}
+                  style={{ justifyContent: "left" }}
                   onClick={() => requestSort("GuildName")}
                   className={getClassNamesFor("GuildName")}
                 >
@@ -49,7 +49,6 @@ export default function PlayersTable(props) {
                 <button
                   style={{
                     justifyContent: "left",
-                    paddingLeft: "5px",
                   }}
                   onClick={() => requestSort("AllianceName")}
                   className={getClassNamesFor("AllianceName")}
@@ -95,7 +94,9 @@ export default function PlayersTable(props) {
                   <td style={{ textAlign: "left" }}>{player.AllianceName}</td>
                   <td>{player.Kills}</td>
                   <td>{player.Deaths}</td>
-                  <td>{formatValue(player.KillFame)}</td>
+                  <td style={{ wordBreak: "keep-all" }}>
+                    {formatValue(player.KillFame)}
+                  </td>
                 </tr>
               ))}
           </tbody>

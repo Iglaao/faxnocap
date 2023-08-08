@@ -57,36 +57,36 @@ export default function BattleboardPage() {
     return (
       <>
         <NavBar />
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-evenly",
-          }}
-        >
+        <div className="battlewrapper">
           <div className="card">
             <div className="title">Battle info:</div>
             <BattleInfo battleboard={bb} />
           </div>
-          <div className="card">
-            <MostChart data={getMostData(bb, "Players")} atr={"Players"} />
+          <div className="most">
+            <div className="card">
+              <MostChart data={getMostData(bb, "Players")} atr={"Players"} />
+            </div>
+            <div className="card">
+              <MostChart data={getMostData(bb, "Kills")} atr={"Kills"} />
+            </div>
+            <div className="card">
+              <MostChart data={getMostData(bb, "KillFame")} atr={"KillFame"} />
+            </div>
+            <div className="card">
+              <MostChart data={getMostData(bb, "Deaths")} atr={"Deaths"} />
+            </div>
           </div>
-          <div className="card">
-            <MostChart data={getMostData(bb, "Kills")} atr={"Kills"} />
+          <div className="algutabs">
+            <div className="card cardbattletable">
+              <div className="title">Alliances:</div>
+              <AllianceTable battleboard={Object.values(bb.Alliances)} />
+            </div>
+            <div className="card cardbattletable">
+              <div className="title">Guilds:</div>
+              <GuildTable battleboard={Object.values(bb.Guilds)} />
+            </div>
           </div>
-          <div className="card">
-            <MostChart data={getMostData(bb, "KillFame")} atr={"KillFame"} />
-          </div>
-
-          <div className="card cardbattletable">
-            <div className="title">Alliances:</div>
-            <AllianceTable battleboard={Object.values(bb.Alliances)} />
-          </div>
-          <div className="card cardbattletable">
-            <div className="title">Guilds:</div>
-            <GuildTable battleboard={Object.values(bb.Guilds)} />
-          </div>
-          <div className="card cardbattletable">
+          <div className="card cardbattletable" style={{ alignSelf: "center" }}>
             <div className="title">Players:</div>
             <PlayerTable battleboard={Object.values(bb.Players)} />
           </div>
@@ -98,7 +98,8 @@ export default function BattleboardPage() {
     return (
       <>
         <NavBar />
-        <div>Empty</div>
+        <div style={{ color: "white" }}>Empty</div>
+        <Footer />
       </>
     );
   }

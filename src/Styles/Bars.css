@@ -12,9 +12,13 @@
 .bars .bar-KillFame {
   background-color: rgb(41, 224, 157);
 }
+.bars .bar-Deaths {
+  background-color: rgb(224, 129, 40);
+}
 .bars .bar-Players,
 .bars .bar-Kills,
-.bars .bar-KillFame {
+.bars .bar-KillFame,
+.bars .bar-Deaths {
   margin: 2px;
   font-size: small;
   border-radius: 5px;
@@ -24,7 +28,8 @@
 }
 .bars .bar-Players .bartooltip,
 .bars .bar-Kills .bartooltip,
-.bars .bar-KillFame .bartooltip {
+.bars .bar-KillFame .bartooltip,
+.bars .bar-Deaths .bartooltip {
   visibility: hidden;
   position: absolute;
   z-index: 1;
@@ -38,7 +43,8 @@
 }
 .bars .bar-Players .bartooltip::after,
 .bars .bar-Kills .bartooltip::after,
-.bars .bar-KillFame .bartooltip::after {
+.bars .bar-KillFame .bartooltip::after,
+.bars .bar-Deaths .bartooltip::after {
   content: "";
   position: absolute;
   top: 40%;
@@ -48,7 +54,8 @@
 }
 .bars .bar-Players:hover .bartooltip,
 .bars .bar-Kills:hover .bartooltip,
-.bars .bar-KillFame:hover .bartooltip {
+.bars .bar-KillFame:hover .bartooltip,
+.bars .bar-Deaths:hover .bartooltip {
   visibility: visible;
 }
 
