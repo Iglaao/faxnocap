@@ -26,3 +26,6 @@ firebase.js
 Icons/
 Images/
 todo.js
+firebase.json
+.firebaserc
+.firebase

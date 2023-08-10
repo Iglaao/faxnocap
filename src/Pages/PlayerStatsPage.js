@@ -54,31 +54,31 @@ export default function PlayerStatsPage({ match }) {
           }}
         >
           <PlayerCard values={lastData} />
-          <div className="card">
+          <div className="card stats">
             <div className="title">Attendance per day</div>
             <DataChart values={getDataMap(playerData, "attendance")} />
           </div>
-          <div className="card">
+          <div className="card stats">
             <div className="title">Attendance</div>
             <DataChart values={getAggregatedData(playerData, "attendance")} />
           </div>
-          <div className="card">
+          <div className="card stats">
             <div className="title">PvP Fame</div>
             <DataChart values={getDataMap(playerData, "pvp", true)} />
           </div>
-          <div className="card">
+          <div className="card stats">
             <div className="title">Gathering Fame</div>
             <DataChart values={getDataMap(playerData, "gathering", true)} />
           </div>
-          <div className="card">
+          <div className="card stats">
             <div className="title">PvE Fame</div>
             <DataChart values={getDataMap(playerData, "pve", true)} />
           </div>
-          <div className="card">
+          <div className="card stats">
             <div className="title">PvE</div>
             <PieChart values={lastData.LifetimeStatistics.PvE} type={"pve"} />
           </div>
-          <div className="card">
+          <div className="card stats">
             <div className="title">Gathering</div>
             <PieChart values={lastData.LifetimeStatistics} type={"gathering"} />
           </div>

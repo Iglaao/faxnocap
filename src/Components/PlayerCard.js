@@ -4,7 +4,7 @@ import { formatValue } from "../Functions/FameFormatter";
 export default function PlayerCard(props) {
   return (
     <>
-      <div className="card">
+      <div className="card stats">
         <div className="title">
           <div>{props.values.Name}</div>
         </div>

@@ -77,8 +77,6 @@ export default function PieChart(props) {
       <>
         <div
           style={{
-            width: "400px",
-            height: "300px",
             display: "flex",
             justifyContent: "center",
           }}

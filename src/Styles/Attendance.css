@@ -17,3 +17,8 @@
     justify-content: space-around;
   }
 }
+@media screen and (max-width: 800px) {
+  .attendance {
+    width: 100%;
+  }
+}

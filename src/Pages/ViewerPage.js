@@ -18,14 +18,16 @@ export default function ViewerPage() {
   const [battle, setBattle] = useState();
 
   async function fetchData(id) {
+    const header = new Headers();
+    header.set("Access-Control-Allow-Origin", "*");
+    header.set(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
     const response = fetch(
-      `https://gameinfo.albiononline.com/api/gameinfo/battles/${id}`,
+      `https://cors-anywhere.herokuapp.com/https://gameinfo.albiononline.com/api/gameinfo/battles/${id}`,
       {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
+        headers: header,
       }
     );
     return (await response).json();

@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TableSelect from "../Components/TableSelect";
 import TableNavig from "../Components/TableNavig";
+import SearchBar from "../Components/SearchBar";
 
 export default function BattlesTable(props) {
   const [offset, setOffset] = useState(0);
   const [slice, setSlice] = useState(10);
+  const [filteredBattles, setFilteredBattles] = useState(props.battles);
+  const [keyword, setKeyword] = useState("");
   const navigate = useNavigate();
 
   const handleOffset = (s) => {
@@ -30,8 +33,27 @@ export default function BattlesTable(props) {
       },
     });
   };
+
+  const updateKeyword = (keyword) => {
+    const filtered = props.battles.filter((battle) => {
+      return (
+        `${battle[1].Title.toLowerCase()}`.includes(keyword.toLowerCase()) ||
+        `${battle[1].StartTime.toDate()
+          .toLocaleString("en-GB", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          })
+          .replaceAll("/", ".")}`.includes(keyword.toLowerCase())
+      );
+    });
+    setKeyword(keyword);
+    setFilteredBattles(filtered);
+  };
+
   return (
     <>
+      <SearchBar keyword={keyword} onChange={updateKeyword} />
       <div className="table-style" style={{ alignItems: "stretch" }}>
         <table>
           <thead>
@@ -41,7 +63,7 @@ export default function BattlesTable(props) {
             </tr>
           </thead>
           <tbody>
-            {props.battles
+            {filteredBattles
               .slice(offset * slice, (offset + 1) * slice)
               .map((battle, index) => (
                 <tr key={index}>

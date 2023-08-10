@@ -38,7 +38,7 @@ export default function AttendanceTable(props) {
               </th>
               <th>
                 <button
-                  style={{ justifyContent: "center" }}
+                  style={{ justifyContent: "right" }}
                   onClick={() => requestSort("Kills")}
                   className={getClassNamesFor("Kills")}
                 >
@@ -47,7 +47,7 @@ export default function AttendanceTable(props) {
               </th>
               <th>
                 <button
-                  style={{ justifyContent: "center" }}
+                  style={{ justifyContent: "right" }}
                   onClick={() => requestSort("Deaths")}
                   className={getClassNamesFor("Deaths")}
                 >
@@ -56,7 +56,7 @@ export default function AttendanceTable(props) {
               </th>
               <th>
                 <button
-                  style={{ justifyContent: "center" }}
+                  style={{ justifyContent: "right" }}
                   onClick={() => requestSort("Attendance")}
                   className={getClassNamesFor("Attendance")}
                 >
@@ -68,7 +68,9 @@ export default function AttendanceTable(props) {
           <tbody>
             {items.map((player, index) => (
               <tr key={index}>
-                <td style={{ textAlign: "center" }}>{index}</td>
+                <td style={{ textAlign: "center", wordBreak: "normal" }}>
+                  {index}
+                </td>
                 <td style={{ textAlign: "left" }}>
                   <a
                     href=""
